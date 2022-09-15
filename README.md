@@ -1,5 +1,5 @@
 ## What is StackAid?
-A monthly subscription to StackAid funds your direct and indirect dependencies by analyzing your project configuration (eg: `package.json`).
+StackAid is a simple way to donate to all the open source software projects you depend on. By subscribing to StackAid, we'll distribute your subscription fee among your projects' direct _and indirect_ dependencies based on your project configuration (eg: package.json).
 
 **Interested in early access to StackAid? [Get in touch](https://www.stackaid.us/invite)**
 
@@ -23,41 +23,37 @@ Let’s make this concrete:
   }
 }
 ```
-With a current subscription of $25/month, `bootstrap` and `sass` are both allocated ($25 * 12 / 2) = $150/year. `sass` has 3 dependencies and so it shares up to 50% of it’s allocation with its dependencies, each capped at 5%, and `sass` is left with the difference. Since `bootstrap` has over 20 dependencies it shares the full 50% of its allocation equallly among them.
+With a current subscription of $20/month, `bootstrap` and `sass` are both allocated ($20 * 12 / 2) = $120/year. `sass` has 3 dependencies and so it shares up to 50% of it’s allocation with its dependencies, each capped at 5%, and `sass` is left with the difference. Since `bootstrap` has over 20 dependencies it shares the full 50% of its allocation equallly among them.
 
 Here's the allocation breakdown:
 ```
-sass/dart-sass (3)           $129/yr
-├ paulmillr/chokidar           $8/yr
-├ immutable-js/immutable-js    $8/yr
-└ 7rulnik/source-map-js        $8/yr
-twbs/bootstrap (41)           $75/yr
-├ postcss/autoprefixer         $2/yr
-├ babel/babel                  $2/yr
-├ bundlewatch/bundlewatch      $2/yr
-├ clean-css/clean-css-cli      $2/yr
-├ kentcdodds/cross-env         $2/yr
-└ 36 more
+sass/dart-sass (3)           $102/yr
+├ paulmillr/chokidar           $6/yr
+├ immutable-js/immutable-js    $6/yr
+└ 7rulnik/source-map-js        $6/yr
+twbs/bootstrap (19)           $60/yr
+├ postcss/autoprefixer         $3/yr
+├ babel/babel                  $3/yr
+├ bundlewatch/bundlewatch      $3/yr
+├ clean-css/clean-css-cli      $3/yr
+├ kentcdodds/cross-env         $3/yr
+└ 14 more
 ```
+You'll notice above that sass earns $1/yr more than expected. This is because bootstrap also depends on sass so it receives an indirect dependency allocation from bootstrap.
 
-Play around with our [allocation tool](https://www.stackaid.us/audit) to see how funding your dependencies could work.
+Play around with our [analyze tool](https://www.stackaid.us/#analyze) to see how funding your dependencies could work.
 
 ## How much does it cost?
-Subscriptions start at $25/developer/month.
+Subscriptions start at $15/developer/month.
 
 ## How do you make money?
-When you add your project dependencies, StackAid is treated as an implicit direct dependency. StackAid is on equal footing, but unlike those dependencies, StackAid's allocation is capped at 5%.
-
-## I have two dependencies, `react` and `leftpad`. Is it fair that they get the same allocation?
-No, it’s not fair.
-
-However, across many subscriptions react is far more popular than leftpad and so the imbalance is sorted out.
+When you add your project dependencies, StackAid is treated as an implicit direct dependency. StackAid is on equal footing, but unlike those dependencies, StackAid's allocation is capped at 7.5%.
 
 ## What happens when an open source project hasn’t claimed their allocation?
 A project's allocations accumulate for 2 months. If the project is not claimed by then, an automatic reallocation happens and the amount is redistributed to the other dependencies that are claimed. Reallocation occurs on a per subscription basis.
 
 ## How do you know this model works?
-While it’s easy to understand how a single subscription is distributed, it’s hard to tell if this is fair and meaningful. We had the same question, so we [built a simulation](https://simulation.stackaid.us/projects) of 5,000 subscribers at $25/month for a year.
+While it’s easy to understand how a single subscription is distributed, it’s hard to tell if this is fair and meaningful. We had the same question, so we [built a simulation](https://simulation.stackaid.us/projects) of 5,000 subscribers for a year.
 
 The bottom line is that the long tail is pretty fat. Popular projects do well, but StackAid funds many more projects that would otherwise get overlooked.
 
@@ -67,14 +63,17 @@ An open source project can associate one or more Stripe accounts to their StackA
 ## How does StackAid figure out my dependencies?
 StackAid’s GitHub app searches your repositories for package dependency files. For example, for JavaScript projects we look for `package.json` files.
 
-## How can I fund a project not in my package dependency tree?
-You can provide a `stackaid.json` file that lists the repositories to treat as direct dependencies. For example, if you wanted to allocate money to the Linux kernel and NodeJS, then you would add these two repositories to your `stackaid.json` file:
+## Is StackAid only for Node.js/npm based projects?
+No, you can use our [GitHub action](https://github.com/marketplace/actions/stackaid-dependency-generator) to automatically generate and publish a stackaid.json file which lists your dependencies.
 
+You can of course manually curate the list of projects you want to fund. For example, if you wanted to allocate money to the Linux kernel and Node.js, then you would add these two repositories to your stackaid.json file:
 ```json
 {
+  "version": 1,
   "dependencies": [
-    "https://github.com/torvalds/linux",
-    "https://github.com/nodejs/node"
+    { "source": "https://github.com/torvalds/linux" },
+    { "source": "https://github.com/nodejs/node" }
   ]
 }
 ```
+We are working on bringing the same level of automated discovery and integration for Node.js projects to other ecosystems.
