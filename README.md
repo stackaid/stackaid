@@ -57,7 +57,7 @@ However, across many subscriptions react is far more popular than leftpad and so
 A project's allocations accumulate for 2 months. If the project is not claimed by then, an automatic reallocation happens and the amount is redistributed to the other dependencies that are claimed. Reallocation occurs on a per subscription basis.
 
 ## How do you know this model works?
-While it’s easy to understand how a single subscription is distributed, it’s hard to tell if this is fair and meaningful. We had the same question, so we [built a simulation](https://demo.stackaid.us/github) of 5,000 subscribers at $25/month for a year.
+While it’s easy to understand how a single subscription is distributed, it’s hard to tell if this is fair and meaningful. We had the same question, so we [built a simulation](https://simulation.stackaid.us/projects) of 5,000 subscribers at $25/month for a year.
 
 The bottom line is that the long tail is pretty fat. Popular projects do well, but StackAid funds many more projects that would otherwise get overlooked.
 
