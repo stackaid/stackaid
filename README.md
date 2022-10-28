@@ -2,7 +2,7 @@
 
 StackAid is a simple way to donate to all the open source software projects you depend on. By subscribing to StackAid, we'll distribute your subscription fee among your projects' direct _and indirect_ dependencies based on your project configuration (eg: package.json).
 
-**Interested in early access to StackAid? [Get in touch](https://www.stackaid.us/invite)**
+**[Get Started](https://github.com/apps/stackaid)**
 
 ## Why doesn’t open source funding work today?
 
